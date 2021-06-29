@@ -1,0 +1,57 @@
+#Download the edge webdriver and put on the C:, inside the folder bot-comentar(create a new folder with this name)
+
+
+
+import time
+from selenium import webdriver
+import random
+print("welcome to Bot-comment ;)")
+time.sleep(1)
+print("Loading...............")
+time.sleep(4)
+login = input("Type your login:")
+senha = input("Type your password:")
+sorteio = input("insert the post URL:")
+marcacao = input("Type what do you wanna comment:")
+def executar_login():
+    navegador.get("https://www.instagram.com")
+    time.sleep(10)
+    for letra in login:
+        campo_usuario = navegador.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(
+        letra)
+        time.sleep(250/random.randint(160,999))
+    for letra in senha:
+        campo_senha = navegador.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input')
+        campo_senha.send_keys(
+        letra)
+        time.sleep(250/random.randint(160,999))
+    time.sleep(5)
+    click_enter = navegador.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button/div').click()
+    time.sleep(7)
+    nao_salvar = navegador.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+    time.sleep(10)
+    nao_ativar = navegador.find_element_by_xpath('/html/body/div[5]/div/div/div/div[3]/button[2]').click()
+
+def comentar(marcacao,repeticoes):
+    for x in range(repeticoes):
+        navegador.get(sorteio)
+        time.sleep(5)
+        campo_coment = navegador.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea').click()
+        campo_comentar = navegador.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
+
+        for letra in marcacao:
+            campo_comentar.send_keys(letra)
+            time.sleep(250/random.randint(160,999))
+        time.sleep(random.randint(3,10))
+        publicar = navegador.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section[3]/div/form/button[2]').click()
+        time.sleep(random.randint(120,500))
+
+
+navegador = webdriver.Edge(executable_path="C:\\bot-comentar\\msedgedriver")
+navegador.maximize_window()
+executar_login()
+comentar(marcacao,300)
+exit("finished!!!")
